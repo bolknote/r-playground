@@ -1,2 +1,2 @@
-bf.R - Brainfuck interpreter (./bf.R "brainfuck program")
+bf.R - Very simple Brainfuck interpreter (./bf.R "brainfuck program")
 luckytickets.R - calculation quantity of lucky tickets
