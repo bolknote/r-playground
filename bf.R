@@ -21,10 +21,10 @@ BF <- setRefClass("BF",
 			jumps <<- numeric(0)
 		},
 		operator.minus = function() {
-			cells[pointer] <<- cells[pointer] - 1
+			cells[pointer] <<- if (cells[pointer] == 0) 255 else cells[pointer] - 1
 		},
 		operator.plus = function() {
-			cells[pointer] <<- cells[pointer] + 1
+			cells[pointer] <<- if (cells[pointer] == 255) 0 else cells[pointer] + 1
 		},
 		operator.right = function() {
 			pointer <<- pointer + 1
