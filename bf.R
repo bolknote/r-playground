@@ -7,9 +7,9 @@ BF <- setRefClass("BF",
 		program = "character",
 		cells = "numeric",
 		pointer = "numeric",
+		ip = "numeric",
 		buffer = "numeric",
-		stack = "numeric",
-		ip = "numeric"
+		jumps = "numeric"
 	),
 	methods = c(
 		initialize = function(program) {
@@ -18,7 +18,7 @@ BF <- setRefClass("BF",
 			pointer <<- 1
 			ip <<- 1
 			buffer <<- numeric(0)
-			stack <<- numeric(0)
+			jumps <<- numeric(0)
 		},
 		operator.minus = function() {
 			cells[pointer] <<- cells[pointer] - 1
@@ -50,18 +50,29 @@ BF <- setRefClass("BF",
 		},
 		operator.begin = function() {
 			if (cells[pointer] == 0) {
-				ip <<- match(']', program)
+				ip <<- as.numeric(names(jumps)[match(ip, jumps)])
 
 				if (is.na(ip)) {
 					stop('End of loop is not found', call. = F)
 				}
-			} else {
-				stack <<- c(ip, stack)
 			}
 		},
 		operator.end = function() {
-			ip <<- stack[1] - 1
-			stack <<- stack[-1]
+			ip <<- jumps[[as.character(ip)]] - 1
+		},
+		createJumpsMap = function() {
+			filter <- program %in% c('[', ']')
+			cycles <- setNames(program[filter], (1:length(program))[filter])
+			stack <- c()
+
+			for (n in names(cycles)) {
+				if (cycles[[n]] == '[') {
+					stack <- c(as.numeric(n), stack)
+				} else {
+					jumps[n] <<- stack[1]
+					stack <- stack[-1]
+				}
+			}
 		},
 		run = function() {
 			methods <- c(
@@ -78,6 +89,8 @@ BF <- setRefClass("BF",
 			program <<- unlist(strsplit(program, ""))
 			program <<- program[program %in% names(methods)]
 			len <- length(program)
+
+			createJumpsMap()
 
 			repeat {
 				methods[[program[ip]]]()
