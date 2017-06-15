@@ -27,10 +27,10 @@ BF <- setRefClass("BF",
 			cells[pointer] <<- if (cells[pointer] == 255) 0 else cells[pointer] + 1
 		},
 		operator.right = function() {
-			pointer <<- pointer + 1
+			pointer <<- if (pointer == 30000) 1 else pointer + 1
 		},
 		operator.left = function() {
-			pointer <<- pointer - 1
+			pointer <<- if (pointer == 1) 30000 else pointer - 1
 		},
 		operator.write = function() {
 			cat(intToUtf8(cells[pointer]))
