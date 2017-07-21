@@ -1,3 +1,4 @@
+99.R - The beer song
 bf.R - Very simple Brainfuck interpreter (./bf.R "brainfuck program")
-luckytickets.R - calculation quantity of lucky tickets
-finfo/ — libmagic R binding
+luckytickets.R - Calculation quantity of lucky tickets
+finfo/* — Libmagic R binding
