@@ -83,12 +83,12 @@ init <- function() {
 		e1
 	});
 
-	setMethod('+', signature=c('morse', 'morse'), function (e1, e2) {
+	setMethod('+', signature('morse', 'morse'), function (e1, e2) {
 		out(e1)
 		+e2
 	});
 
-	setMethod('-', signature=c('morse', 'morse'), function (e1, e2) {
+	setMethod('-', signature('morse', 'morse'), function (e1, e2) {
 		out(e1)
 		-e2
 	});
