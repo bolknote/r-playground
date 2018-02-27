@@ -67,10 +67,8 @@ init <- function() {
 		prototype(stack = c())
 	)
 
-	setGeneric('out', function(obj) standardGeneric('out'))
-
-	setMethod('out', 'morse', function(obj)
-		cat(code[[paste0(rev(obj@stack), collapse="")]])
+	setMethod('show', 'morse', function(object)
+		cat(code[[paste0(rev(object@stack), collapse="")]])
 	)
 
 	setMethod('-', 'morse', function (e1) {
@@ -84,12 +82,12 @@ init <- function() {
 	});
 
 	setMethod('+', signature('morse', 'morse'), function (e1, e2) {
-		out(e1)
+		show(e1)
 		+e2
 	});
 
 	setMethod('-', signature('morse', 'morse'), function (e1, e2) {
-		out(e1)
+		show(e1)
 		-e2
 	});
 
@@ -101,8 +99,4 @@ init <- function() {
 
 # cat(toMorseStr("What hath God wrought?"))
 
-out(+--.++++.+-.-.-+++-.++++.+-.-.++++.-+++-.--+.---.-++.-+++-.+--.+-+.---.++-.--+.++++.-.++--++.)
-
-
-
-
++--.++++.+-.-.-+++-.++++.+-.-.++++.-+++-.--+.---.-++.-+++-.+--.+-+.---.++-.--+.++++.-.++--++.
