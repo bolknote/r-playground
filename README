@@ -4,3 +4,4 @@ life.R — Conway's Game of Life
 luckytickets.R - Calculation quantity of lucky tickets
 finfo/* — Libmagic R binding
 morse.R — Morse code as unary R operators
+survivors.R — The problem of spies and poison
