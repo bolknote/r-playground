@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 library(methods)
 
 Life <- setRefClass("Life",
